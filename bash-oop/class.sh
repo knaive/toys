@@ -70,12 +70,6 @@ savevar() {
   done
 }
  
-typeof() {
-  local objectName=$1
-  eval id=\$$objectName
-  eval echo \$\{TYPEOF_$id\}
-}
-
 # new <class name> <object name> <parameters for constructor>
 new() {
   local class="$1"
@@ -83,8 +77,6 @@ new() {
   shift
   shift
   local id=$(uuidgen | sed -e 's/-//g' -e 's/.*/\L&/')
-  eval TYPEOF_${id}=$class
-  eval $obj=$id
   local funclist
   eval "funclist=\"\$CLASS_${class}_FUNCTIONS\""
   for func in $funclist; do
